@@ -65,15 +65,22 @@ class Collect(object):
                     print 'D',
                 
                 # clean field
-                product['wei_kuan'] = '::'.join(product['wei_kuan'])
-                product['wei_kuan_list'] = '::'.join(product['wei_kuan_list'])
-                
-                product = flatten_dict(product, layers=3)
+                try:
+                    product['wei_kuan'] = '::'.join(product['wei_kuan'])
+                    product['wei_kuan_list'] = '::'.join(product['wei_kuan_list'])
+                except:
+                    print 'W',
+                    
+                try:
+                    product = flatten_dict(product, layers=3)
+                except:
+                    print 'P',
+                    
                 self.collect.append(product)
                 
         except Exception as e:
-            print e
-            print 'X',
+            # print e
+            print 'T',
             self.__scrape(index)  
             
     def main(self):
