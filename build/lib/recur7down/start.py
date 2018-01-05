@@ -6,9 +6,17 @@ from multiprocessing.dummy import Pool as ThreadPool
 import pandas as pd
 import os
 
+
+
 cpu = cpu_count()*6
 
+
 link = "some link with three '{}' representing location index, category index, and page index"
+
+link = raw_input('the PATH of file contains a single string of the url link: ')
+cpu = int(raw_input('(multi-processing) how many process do you want to run? '))
+
+
 cat = [10020, 10021, 10010, 10001, 10003, 10006, 10019, 10008, 10009, 10011, 10013, \
        10023, 10022, 10015, 10012, 10007, 10017, 10018]
 
@@ -35,7 +43,7 @@ def helper((link, place, cat)):
     
     
     
-if __name__=="__main__":
+def main():
     
     print "combinations: "+str(len(swim))
     start=time()

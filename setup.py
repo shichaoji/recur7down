@@ -18,7 +18,7 @@ with open(os.path.join(_HERE, 'README.rst'),'r+') as fh:
 
 setup(
     name = "recur7down",
-    version = "0.1.2",
+    version = "0.1.5",
     description = "job related code",
     long_description = long_description,
     author = "Shichao(Richard) Ji",
@@ -36,8 +36,8 @@ setup(
         'Pandas',
 	'json2df'
       ],
-    #entry_points={
-    #      'console_scripts': ['picutils=picutils:main'],
-    #  },
+    entry_points={
+        'console_scripts': ['recur7down=recur7down:main'],
+      },
 )
 
