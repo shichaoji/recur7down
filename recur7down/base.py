@@ -56,10 +56,13 @@ class Collect(object):
             for product in products:
                 # clean field "doctor" for encoding
                 s = ''
-                for d in product['doctor']:
-                    for e in d.items():
-                        s = s+'::'.join(e)+'--'
-                product['doctor'] = s
+                try:
+                    for d in product['doctor']:
+                        for e in d.items():
+                            s = s+'::'.join(e)+'--'
+                    product['doctor'] = s
+                except:
+                    print 'D',
                 
                 # clean field
                 product['wei_kuan'] = '::'.join(product['wei_kuan'])

@@ -14,6 +14,7 @@ import json
 import requests
 import os
 from time import time, ctime
+from json2df import flatten_dict
 
 
 
@@ -53,6 +54,21 @@ class Collect(object):
             
 
             for product in products:
+                # clean field "doctor" for encoding
+                s = ''
+                try:
+                    for d in product['doctor']:
+                        for e in d.items():
+                            s = s+'::'.join(e)+'--'
+                    product['doctor'] = s
+                except:
+                    print 'D',
+                
+                # clean field
+                product['wei_kuan'] = '::'.join(product['wei_kuan'])
+                product['wei_kuan_list'] = '::'.join(product['wei_kuan_list'])
+                
+                product = flatten_dict(product, layers=3)
                 self.collect.append(product)
                 
         except Exception as e:
