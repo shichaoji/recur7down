@@ -79,8 +79,9 @@ class Collect(object):
                 self.collect.append(product)
                 
         except Exception as e:
-            # print e
+            print e
             print 'T',
+            exit(0)
             self.__scrape(index)  
             
     def main(self):

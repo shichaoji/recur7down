@@ -79,8 +79,9 @@ class Collect(object):
                 self.collect.append(product)
                 
         except Exception as e:
-            # print e
+            print e
             print 'T',
+            exit(0)
             self.__scrape(index)  
             
     def main(self):
@@ -106,7 +107,7 @@ class Collect(object):
     def save(self):
         
         ct = ctime().split()
-        folder= ct[2]+ct[1]+ct[-1]+'_data/'
+        folder= ct[2]+ct[1]+ct[-1]+'_product/'
         try:
             os.mkdir(folder)
         except:

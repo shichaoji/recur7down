@@ -1,3 +1,3 @@
 from .base import Collect
-from .start import main
+from .products import main
 
