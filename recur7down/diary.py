@@ -52,16 +52,16 @@ def One(ID):
         print 'O',
         
     except Exception as e:
-        print ID,
+        print ID, e
         try:
             print r.status_code,
         except:
-            pass
+            return
         try:
             df.shape
         except:
-            pass
-        print e,
+            return
+        
         #if r.status_code==200:
         if df.shape[0]==0:
                 pass
@@ -120,21 +120,38 @@ def diary_main():
     
     
     print 'start concating data'
-    
+    start2=time()
     
     files = os.listdir(folder)
     print len(files)
-    df = pd.concat([pd.read_excel(folder + i) for i in files])
-    print df.shape
+    
+
+    tmp = []
+    for i in files:
+        try:
+            tmp.append(pd.read_excel(path+i))
+        except:
+            print i,
+    print len(tmp)
+    df = pd.concat(tmp)
+    print df.shape    
+    
+    end2 = time()
+    elapse2 = end2 - start2 
+    print 'used {:.2f} s, {:.2f} mins'.format(elapse2, elapse2/60)
+    
     print 'removing duplicates'
     
-    #col = list(df.columns)
-    #col = [col.pop(col.index('pid')), col.pop(col.index('title'))]+col
-    #df = df[col]
-    #df = df.reset_index(drop=True)
-    
-    #df = df.loc[df['pid'].drop_duplicates().index,:]
+    col = list(df.columns)
+    col = [col.pop(col.index('group_id')), col.pop(col.index('uid')), col.pop(col.index('user_name')), col.pop(col.index('top.summary'))]+col
+    df = df[col]
+    df = df.reset_index(drop=True)
+    df = df.loc[df['group_id'].drop_duplicates().index,:]
     print df.shape
+
+
+
+
     print 'saving to products.xlsx'
     
     df.to_excel(strftime("%Y-%m-%d-%H-%M",localtime())+ ' diary.xlsx', encoding='utf-8', index=False)
