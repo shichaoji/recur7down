@@ -53,7 +53,14 @@ def One(ID):
         
     except Exception as e:
         print ID,
-        print r.status_code,
+        try:
+            print r.status_code,
+        except:
+            pass
+        try:
+            df.shape
+        except:
+            pass
         print e,
         #if r.status_code==200:
         if df.shape[0]==0:
