@@ -46,6 +46,8 @@ def One(ID):
         col = [col.pop(col.index('group_id')), col.pop(col.index('uid')), col.pop(col.index('user_name')), col.pop(col.index('top.summary'))]+col
         df = df[col]
         df.pop('other.summary')
+        df.pop('item')
+        df.pop('tag_info')
         df['from_product']=ID
         df = df.set_index('from_product')
         df.to_excel(folder + str(ID)+'.xlsx', encoding='utf-8')
