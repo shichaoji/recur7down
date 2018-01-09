@@ -107,7 +107,7 @@ class Collect(object):
     def save(self):
         
         ct = ctime().split()
-        folder= ct[2]+ct[1]+ct[-1]+'_data/'
+        folder= ct[2]+ct[1]+ct[-1]+'_product/'
         try:
             os.mkdir(folder)
         except:

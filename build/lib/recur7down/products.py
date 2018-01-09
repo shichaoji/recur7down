@@ -8,52 +8,11 @@ import os
 
 
 
-cpu = cpu_count()*6
-
-
-link = "some link with three '{}' representing location index, category index, and page index"
-
-print link
-#path = raw_input('the PATH of file contains a single string of the url link: ')
-#with open(path) as fh:
-#    link = fh.read()
-cpu = int(raw_input('(multi-processing) how many process to run ? '))
-
-
-#cat = [10020, 10021, 10010, 10001, 10003, 10006, 10019, 10008, 10009, 10011, 10013, \
-#       10023, 10022, 10015, 10012, 10007, 10017, 10018]
-
-#large = [19, 1, 17, 9, 10, 11, 23, 18, 15, 16, 12, 22, 13, 6]
-#small = [25, 27, 14, 3, 2, 556, 8, 20, 31, 7, 21, 4, 24, 28, 5, 32, 30, 33, 29, 561, 560, 34]
-
-print 'create a info.py in the current directory contains e.g.\n link=""'
-
-print os.getcwd()
-
-sys.path.append(os.getcwd())
+#cpu = cpu_count()*6
 
 
 
-del link
-quit=0
-try:
-	from info import *
-	print 'imported data from info'
-except:
-	print 'lack of  info.py'
-	quit=1
-	exit(0)
 
-
-
-swim = []
-
-for i in small:
-    swim.append((link, i, 0))
-    
-for p in large:
-    for c in cat:
-        swim.append((link, p, c))
     
 
 def helper((link, place, cat)):
@@ -66,10 +25,55 @@ def helper((link, place, cat)):
     
     
     
-def main():
-    #print quit
-    #if quit:
-    #	sys.exit('lack of info.py')
+def product_main():
+    
+    try:
+        sys.path.append(os.getcwd())
+        from info import link, cat, large, small
+        print 'imported data from info'
+        sys.path.remove(os.getcwd())
+
+    except:
+        print 'lack of info.py'
+        exit(0)
+        
+        
+    #path = raw_input('the PATH of file contains a single string of the url link: ')
+    #with open(path) as fh:
+    #    link = fh.read()
+    cpu = int(raw_input('(multi-processing) how many process to run ? '))
+
+
+    #cat = [10020, 10021, 10010, 10001, 10003, 10006, 10019, 10008, 10009, 10011, 10013, \
+    #      10023, 10022, 10015, 10012, 10007, 10017, 10018]
+
+    #large = [19, 1, 17, 9, 10, 11, 23, 18, 15, 16, 12, 22, 13, 6]
+    #small = [25, 27, 14, 3, 2, 556, 8, 20, 31, 7, 21, 4, 24, 28, 5, 32, 30, 33, 29, 561, 560, 34]
+
+    
+    try:
+        from info import link, cat, large, small
+        print 'imported data from info'
+    except:
+        print 'lack of info.py'
+        exit(0)    
+
+
+
+    swim = []
+
+    for i in small:
+        swim.append((link, i, 0))
+
+    for p in large:
+        for c in cat:
+            swim.append((link, p, c))
+    
+    
+    
+    
+    
+    
     
     print "combinations: "+str(len(swim))
     start=time()
@@ -87,7 +91,7 @@ def main():
     print 'start concating data'
     
     ct = ctime().split()
-    path = ct[2]+ct[1]+ct[-1]+'_data/'
+    path = ct[2]+ct[1]+ct[-1]+'_product/'
     
     files = os.listdir(path)
     len(files)
