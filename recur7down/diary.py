@@ -43,8 +43,7 @@ def One(ID):
         df = pd.DataFrame(map(lambda p: flatten_dict(p, layers=3), lists))
 
         col = list(df.columns)
-        col = [col.pop(col.index('group_id')), col.pop(col.index('uid')), col.pop(col.index('user_name')), col.pop(col.index('top.summary'))]+co
-l
+        col = [col.pop(col.index('group_id')), col.pop(col.index('uid')), col.pop(col.index('user_name')), col.pop(col.index('top.summary'))]+col
         df = df[col]
         df.pop('other.summary')
         df['from_product']=ID
@@ -53,7 +52,7 @@ l
         print 'O',
         
     except Exception as e:
-        print ID, df.shape,
+        print ID,
         print r.status_code,
         print e,
         #if r.status_code==200:
@@ -91,6 +90,9 @@ def diary_main():
 
     have = list(map(lambda x: x.split('.')[0] ,os.listdir(folder)))
     want = list(set(content)-set(have))
+    
+    print 'all product diary - already scraped'
+    print len(content), len(have), len(want)
     
     
     
