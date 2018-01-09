@@ -41,7 +41,7 @@ def One(ID):
     
     
     try:
-        col = list(self.df.columns)
+        col = list(df.columns)
         col = [col.pop(col.index('group_id')), col.pop(col.index('uid')), col.pop(col.index('user_name')), col.pop(col.index('top.summary'))]+col
         df = df[col]
         df.pop('other.summary')
@@ -54,6 +54,7 @@ def One(ID):
         One(ID)
 
 def diary_main():
+    global diary, folder
     
     try:
         sys.path.append(os.getcwd())
