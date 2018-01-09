@@ -129,7 +129,7 @@ def diary_main():
     tmp = []
     for i in files:
         try:
-            tmp.append(pd.read_excel(path+i))
+            tmp.append(pd.read_excel(folder+i))
         except:
             print i,
     print len(tmp)
