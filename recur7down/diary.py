@@ -95,7 +95,7 @@ def diary_main():
     content = pd.read_csv('./diary_products.csv', names=['product_id'])['product_id'].tolist()
     cpu = int(raw_input('(multi-processing) how many process to run ? '))
 
-    have = list(map(lambda x: x.split('.')[0] ,os.listdir(folder)))
+    have = list(map(lambda x: int(x.split('.')[0]) ,os.listdir(folder)))
     want = list(set(content)-set(have))
     
     print 'all product diary - already scraped'
