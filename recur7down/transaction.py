@@ -30,8 +30,9 @@ class Transaction(object):
             try:
                 r = requests.get(self.link.format(self.index))
                 d = json.loads(r.text)
-                c = d['list']
+                
                 self.page, self.all = int(d['pages']['all']), int(d['pages']['all_num'])
+                c = d['list']
                 
                 if len(c)>0:
                     self.content = self.content+c
@@ -40,9 +41,14 @@ class Transaction(object):
                 print 'page:',self.page,'all:', self.all,
                 print '{}/{}'.format(self.index-1,self.page),
             except Exception as e:
-                print '1X',
+                print 'N', 
+                try:
+                    if self.all==0:
+                        print '0',
+                    
                 #print e
-                self.initial()
+                except:
+                    self.initial()
         
     def process(self):
         if self.page >= self.index:
@@ -66,12 +72,14 @@ class Transaction(object):
                 self.process()
         else:
             print 'R',
-            if len(self.content)==self.all:
+            if self.all==0:
+                print '0e'
+            elif len(self.content)==self.all:
                 try:
                     self.df = pd.DataFrame(self.content)
                     print self.df.shape,
                     self.df.to_excel(folder+str(self.pid)+'.xlsx', index=False)
-                    print str(self.pid)+'.xlsx Done'
+                    print str(self.pid)+'.xlsx Done ',
                 except Exception as e:
                     print e,
                     print 'S',
