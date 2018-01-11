@@ -133,7 +133,7 @@ def transaction_main():
         tmp = []
         for i in files:
             try:
-                one = pd.read_excel(path+i)
+                one = pd.read_excel(folder+i)
                 one['PID']=int(i.split('.')[0])
                 tmp.append(one)
             except:
@@ -177,6 +177,6 @@ def transaction_main():
     end = time()
     elapse = end - start 
     
-    print 'used {:.2f} s, {:.2f} mins'.format(elapse/60)
+    print 'used {:.2f} s, {:.2f} mins'.format(elapse, elapse/60)
         
     
