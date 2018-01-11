@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import sys
+import os
 try:
     reload(sys)
     sys.setdefaultencoding("utf-8")
@@ -59,7 +60,7 @@ class Transaction(object):
                     print '<',
                     self.process()
             except Exception as e:
-                print e
+                #print e,
                 print 'X',
                 self.process()
         else:
@@ -88,7 +89,7 @@ def helper(ID):
     
     
 def transaction_main():
-    global transaction, folder
+    global link, folder
     
     try:
         sys.path.append(os.getcwd())
@@ -96,7 +97,8 @@ def transaction_main():
         print 'imported transaction link from info'
         sys.path.remove(os.getcwd())
 
-    except:
+    except Exception as e:
+        print e
         print 'lack of info.py'
         exit(0)    
     
@@ -134,6 +136,6 @@ def transaction_main():
     end = time()
     elapse = end - start 
     
-    print 'used {:.2f} s, {:.2f} mins'.format(elapse, elapse/60)
+    print 'used {:.2f} s, {:.2f} mins'.format(elap elapse/60)
         
     
