@@ -18,7 +18,7 @@ with open(os.path.join(_HERE, 'README.rst'),'r+') as fh:
 
 setup(
     name = "recur7down",
-    version = "0.1.8.1",
+    version = "0.1.8.3",
     description = "recursive web scraper code for work related project",
     long_description = long_description,
     author = "Shichao(Richard) Ji",

@@ -64,9 +64,11 @@ def One(ID):
         except:
             return
         
-        #if r.status_code==200:
+
         if df.shape[0]==0:
-                pass
+            return
+        if r.status_code==200:
+            return
         else:
                 One(ID)
 
@@ -162,9 +164,9 @@ def diary_main():
     for p in pics:
         try:
             df.pop(i)
-            print 'Pop',
+            print 'Pop',i
         except:
-            print 'P'
+            print 'F',i
     df = df.reset_index(drop=True)
     df = df.loc[df['group_id'].drop_duplicates().index,:]
     print df.shape
