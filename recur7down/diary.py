@@ -163,10 +163,10 @@ def diary_main():
     
     for p in pics:
         try:
-            df.pop(i)
-            print 'Pop',i
+            df.pop(p)
+            print 'Pop',p
         except:
-            print 'F',i
+            print 'F',p
     df = df.reset_index(drop=True)
     df = df.loc[df['group_id'].drop_duplicates().index,:]
     print df.shape
