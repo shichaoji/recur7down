@@ -40,7 +40,8 @@ class Transaction(object):
                 print 'page:',self.page,'all:', self.all,
                 print '{}/{}'.format(self.index-1,self.page),
             except Exception as e:
-                print e
+                print '1X',
+                #print e
                 self.initial()
         
     def process(self):
@@ -136,6 +137,6 @@ def transaction_main():
     end = time()
     elapse = end - start 
     
-    print 'used {:.2f} s, {:.2f} mins'.format(elap elapse/60)
+    print 'used {:.2f} s, {:.2f} mins'.format(elapse/60)
         
     
