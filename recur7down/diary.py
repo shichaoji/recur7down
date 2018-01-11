@@ -147,6 +147,24 @@ def diary_main():
     col = list(df.columns)
     col = [col.pop(col.index('group_id')), col.pop(col.index('uid')), col.pop(col.index('user_name')), col.pop(col.index('top.summary'))]+col
     df = df[col]
+    
+    pics = ['avatar.u',
+    'middle.img.u',
+    'middle.img.u_n',
+    'middle.img.u_z',
+    'other.img.u',
+    'top.color',
+    'top.img.u',
+    'top.img.u_z',
+    'top.img.u_n',
+    'top.record_post_img',]
+    
+    for p in pics:
+        try:
+            df.pop(i)
+            print 'Pop',
+        except:
+            print 'P'
     df = df.reset_index(drop=True)
     df = df.loc[df['group_id'].drop_duplicates().index,:]
     print df.shape
