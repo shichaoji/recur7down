@@ -60,7 +60,8 @@ class Transaction(object):
 
                 if len(c)>0:
                     self.content = self.content+c
-                    print '{}/{}'.format(self.index,self.page),
+                    #print '{}/{}'.format(self.index,self.page),
+                    print 'O',
                     self.index+= 1
                     self.process()
                 else:
@@ -73,7 +74,7 @@ class Transaction(object):
         else:
             print 'R',
             if self.all==0:
-                print '0e'
+                print '0e',
             elif len(self.content)==self.all:
                 try:
                     self.df = pd.DataFrame(self.content)
@@ -117,10 +118,41 @@ def transaction_main():
     try:
         os.mkdir(folder)
     except:
-        print 'D'     
+        print 'D'    
         
-    
+    # cancat to one excel after down
+    flag = raw_input('merge into one excel? do this after done scraping!  y/n: ')
+    if flag.lower()=='y':
 
+        print 'start concating data'
+        start2=time()        
+        
+        files = os.listdir(folder)
+        print len(files)
+
+        tmp = []
+        for i in files:
+            try:
+                one = pd.read_excel(path+i)
+                one['PID']=int(i.split('.')[0])
+                tmp.append(one)
+            except:
+                print i,
+        print len(tmp)
+        df = pd.concat(tmp)
+        print df.shape        
+    
+        col = list(df.columns)
+        change_order = ['PID',]
+        col = [col.pop(col.index(i)) for i in change_order]+col
+        df = df[col]
+
+        end2 = time()
+        elapse2 = end2 - start2 
+        print 'used {:.2f} s, {:.2f} mins'.format(elapse2, elapse2/60)
+        print 'saving to transactions.xlsx'
+        df.to_excel(strftime("%Y-%m-%d-%H-%M",localtime())+ ' transaction.xlsx', encoding='utf-8', index=False)
+        print 'done!', ctime()
 #### start
     content = pd.read_csv('./transaction_products.csv')['pid'].tolist()
     cpu = int(raw_input('(multi-processing) how many process to run ? '))

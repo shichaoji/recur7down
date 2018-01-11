@@ -174,7 +174,7 @@ def diary_main():
 
 
 
-    print 'saving to products.xlsx'
+    print 'saving to diary.xlsx'
     
     df.to_excel(strftime("%Y-%m-%d-%H-%M",localtime())+ ' diary.xlsx', encoding='utf-8', index=False)
     print 'done!', ctime()
