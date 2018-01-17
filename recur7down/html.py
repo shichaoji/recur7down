@@ -29,7 +29,7 @@ except:
 def getsingle(ID):
     global fail, n
     n+=1
-    if n%1000==0 or n==1:
+    if n%5000==0 or n==1:
         print ctime(), 'of ', n, 'failed', len(fail)
     try:
         one=requests.get(diary_link.format(ID), timeout=10)
@@ -74,7 +74,7 @@ def batch(allnames):
     elapse = end - start 
     now=ctime()[4:]
 
-    print 'diary ',len(allnames),'  used ',elapse,'s', now
+    print 'diary ',len(allnames),'  used ',elapse,'s', elapse/60,'min',now
 
     
 def html_main():
@@ -94,42 +94,31 @@ def html_main():
     fail=[]
     cpu = int(raw_input('(multi-processing) how many process to run ? '))
     
-    try:
-        f=pd.read_csv('diary_html_fail.csv')
-        print 'fail exists'
-        if f.shape[0]>20:
-            fail=[]
-            batch(f.values)
-            os.remove('diary_html_fail.csv')
-            print 'Done!'
-            print 1
-            exit()
-            # pd.DataFrame(fail, columns=['username']).to_csv('fail.csv',index=False)
-            
-        else:
-            print 'Scrape Success!!!'
-            print len(os.listdir(folder))
-            os.remove('diary_html_fail.csv')
-            print 2
-            exit()
+
         
-    except:
-        print 3
-        print 'fail not exists'
-        
-        df=pd.read_csv('diary_all.csv', usecols=['group_id'])
-        print 'start scraping', ctime()
-        print len(df['group_id'].unique()), df.shape
+    df=pd.read_csv('diary_all.csv', usecols=['group_id'])
+    print 'start scraping', ctime()
+    print len(df['group_id'].unique()), df.shape
 
-        all_ids=df['group_id'].tolist()
+    all_ids=df['group_id'].tolist()
+    
+    have = list(map(lambda x: int(x.split('.')[0]) ,os.listdir(folder)))
+    want = list(set(all_ids)-set(have))
+    
+    print 'all diary htmls - already scraped'
+    print len(all_ids), len(have), len(want)    
+    
 
-        print len(all_ids)
+    print len(want)
 
-        fail=[]
-        batch(all_ids)
-            
+    fail=[]
+    batch(want)
+    
+    
+
     if len(fail)>-1:
+        print 'logging fail IDs'
         
-        pd.DataFrame(fail, columns=['group_id']).to_csv('diary_html_fail.csv',index=False)
+        pd.DataFrame(fail, columns=['group_id']).to_csv(ct[2]+ct[1]+ct[-1]+'_diary_html_fail.csv',index=False)
     else:
         print 'done!', ctime()
