@@ -12,10 +12,13 @@ import requests
 # import recur7down
 from multiprocessing.dummy import Pool as ThreadPool
 
+fail=[]
+n=0
+cpu=24
+
 
 ct = ctime().split()
 folder= ct[2]+ct[1]+ct[-1]+'_htmls_diary/'
-from info import diary_link
 
 try:
     os.mkdir(folder)
@@ -26,16 +29,31 @@ except:
 def getsingle(ID):
     global fail, n
     n+=1
-    if n%5000==0 or n==1:
+    if n%1000==0 or n==1:
         print ctime(), 'of ', n, 'failed', len(fail)
     try:
-        one=requests.get(diary_link.format(ID))
+        one=requests.get(diary_link.format(ID), timeout=10)
+        if one.status_code==200:
+        
+            with open(folder+'{}.html'.format(ID), 'w+') as fl:
+            
+                fl.write(one.text)
+    #     print 'O',        
     except:
 #         print 'X',
-        fail.append(ID)
-    with open(folder+'{}.html'.format(ID), 'w+') as fl:
-        fl.write(one.text)
-#     print 'O',
+        try:
+            getsingle(ID)
+        
+        except:
+            try:
+                getsingle(ID)
+            except:
+                fail.append(ID)
+                
+        
+        
+        
+
     
 
 
@@ -60,7 +78,7 @@ def batch(allnames):
 
     
 def html_main():
-
+    global cpu, diary_link
     try:
         sys.path.append(os.getcwd())
         from info import diary_link
