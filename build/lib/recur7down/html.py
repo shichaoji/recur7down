@@ -36,9 +36,12 @@ def getsingle(ID):
         if one.status_code==200:
         
             with open(folder+'{}.html'.format(ID), 'w+') as fl:
-            
+
                 fl.write(one.text)
     #     print 'O',        
+        else:
+            print 'X:',one.status_code,
+            
     except:
 #         print 'X',
         try:
@@ -58,14 +61,14 @@ def getsingle(ID):
 
 
 
-def batch(allnames):
+def batch(all_IDs):
     global n
     n=0
     start=time()
 
     pool = ThreadPool(cpu)
     
-    results = pool.map(getsingle, allnames)
+    results = pool.map(getsingle, all_IDs)
     
     pool.close()
     pool.join()
@@ -74,7 +77,7 @@ def batch(allnames):
     elapse = end - start 
     now=ctime()[4:]
 
-    print 'diary ',len(allnames),'  used ',elapse,'s', elapse/60,'min',now
+    print 'diary ',len(all_IDs),'  used ',elapse,'s', elapse/60,'min',now
 
     
 def html_main():
@@ -116,7 +119,7 @@ def html_main():
     
     
 
-    if len(fail)>-1:
+    if len(fail)>0:
         print 'logging fail IDs'
         
         pd.DataFrame(fail, columns=['group_id']).to_csv(ct[2]+ct[1]+ct[-1]+'_diary_html_fail.csv',index=False)
