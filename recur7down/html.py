@@ -10,7 +10,6 @@ from time import time, ctime
 import requests
 
 # import recur7down
-from info import diary_link
 from multiprocessing.dummy import Pool as ThreadPool
 
 
@@ -61,6 +60,17 @@ def batch(allnames):
 
     
 def html_main():
+
+    try:
+        sys.path.append(os.getcwd())
+        from info import diary_link
+        print 'imported data from info'
+        sys.path.remove(os.getcwd())
+
+    except:
+        print 'lack of info.py'
+        exit(0)        
+    
     
     n=0
     fail=[]
