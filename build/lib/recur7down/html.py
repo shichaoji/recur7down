@@ -77,7 +77,7 @@ def batch(all_IDs):
     elapse = end - start 
     now=ctime()[4:]
 
-    print 'diary ',len(all_IDs),'  used ',elapse,'s', elapse/60,'min',now
+    print 'diary ',len(all_IDs),'  used {:.2f} s {:.2f} mins'.format(elapse, elapse/60) ,now
 
     
 def html_main():
