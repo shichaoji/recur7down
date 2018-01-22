@@ -106,10 +106,13 @@ class Hparser(object):
                 self.coll.append(self._video(p))
                 
     def main(self):
-        self._product()
-        self._content()
-        self.loop()
-        self._update(self.coll)
+        try:
+            self._product()
+            self._content()
+            self.loop()
+            self._update(self.coll)
+        except:
+            print 'X',
         
     def __repr__(self):
         return "diary: {} of product: {} has {} posts, all {} posts finished parsing"\
