@@ -8,7 +8,7 @@ from .parse_diary import parse_diary_main
 
 
 def main():
-    c = raw_input('get product(p) or diary(d) or transaction(t) or html(h) or parse diary(pd):  \np/d/t/h.pd? ')
+    c = raw_input('get product(p) or diary(d) or transaction(t) or html(h) or parse diary(pd):  \np/d/t/h/pd? ')
     if c.lower()=='p':
         product_main()
     elif c.lower()=='d':

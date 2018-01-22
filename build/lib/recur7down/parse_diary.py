@@ -25,7 +25,7 @@ class Hparser(object):
             with open(html) as fh:self.tree = etree.HTML(fh.read())
         except Exception as e:
             print e, 'X0'
-            print diaryID        
+            print self.diaryID        
         #print self.diaryID, self.tree
         
         
@@ -42,10 +42,10 @@ class Hparser(object):
         
     def _product(self):
         try: self.pid = self.tree.xpath('//div[@class="value product-name"]/a/@href')[0].split('/')[-1]
-        except: print 'X pid'
+        except Exception as e: print e, self.diaryID, 'X pid'
     def _content(self):
         try:self.content = self.tree.xpath('//li[@class="diary-item"]'); self.dn = len(self.content)
-        except: print 'X content'
+        except Exception as e: print e, self.diaryID,  'X content'
             
     def _image(self, node):
         dic={}
