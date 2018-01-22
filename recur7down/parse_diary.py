@@ -42,7 +42,7 @@ class Hparser(object):
         
     def _product(self):
         try: self.pid = self.tree.xpath('//div[@class="value product-name"]/a/@href')[0].split('/')[-1]
-        except Exception as e: self.diaryID,'pX',
+        except Exception as e: print 'X',
     def _content(self):
         try:self.content = self.tree.xpath('//li[@class="diary-item"]'); self.dn = len(self.content)
         except Exception as e: print e, self.diaryID,  'X content',
@@ -112,7 +112,7 @@ class Hparser(object):
             self.loop()
             self._update(self.coll)
         except:
-            print 'X',
+            print 'MX',
         
     def __repr__(self):
         return "diary: {} of product: {} has {} posts, all {} posts finished parsing"\
@@ -133,7 +133,7 @@ def parse_diary_main():
         if n%5000==0:
             end=time()
             elapse = end - start 
-            print '{} {:.2f} s'.format(n, elapse),        
+            print '{} {:.2f} s'.format(n, elapse)        
             start=time()
     print 'done parsing all'
     elapse0=time()-start0
