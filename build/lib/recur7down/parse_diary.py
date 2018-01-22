@@ -42,10 +42,10 @@ class Hparser(object):
         
     def _product(self):
         try: self.pid = self.tree.xpath('//div[@class="value product-name"]/a/@href')[0].split('/')[-1]
-        except Exception as e: print e, self.diaryID, 'X pid'
+        except Exception as e: self.diaryID,'pX',
     def _content(self):
         try:self.content = self.tree.xpath('//li[@class="diary-item"]'); self.dn = len(self.content)
-        except Exception as e: print e, self.diaryID,  'X content'
+        except Exception as e: print e, self.diaryID,  'X content',
             
     def _image(self, node):
         dic={}
@@ -125,11 +125,11 @@ def parse_diary_main():
     folder = folder if folder.endswith('/') else folder+'/'
     
     n=0
+    start=time()
+    start0=time()
     for d in htmls:
         Hparser(folder+d)
         n+=1
-        start0=time()
-        start=time()
         if n%5000==0:
             end=time()
             elapse = end - start 
