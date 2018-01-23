@@ -106,9 +106,10 @@ def html_main():
             cpu = int(raw_input('(multi-processing) how many process to run ? '))
     except:
         cpu = int(raw_input('(multi-processing) how many process to run ? '))
+        diary_index_path = 'diary_all.csv'
     
     
-    diary_index_path = 'diary_all.csv'
+    
         
     df=pd.read_csv(diary_index_path, usecols=['group_id'])
     
