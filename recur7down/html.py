@@ -81,6 +81,8 @@ def batch(all_IDs):
 
     
 def html_main():
+    print sys.argv
+    
     global cpu, diary_link
     try:
         sys.path.append(os.getcwd())

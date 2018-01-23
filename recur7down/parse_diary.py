@@ -133,7 +133,7 @@ def parse_diary_main():
         if n%5000==0:
             end=time()
             elapse = end - start 
-            print '{} {:.2f} s'.format(n, elapse)        
+            print '\n{} {:.2f} s'.format(n, elapse)        
             start=time()
     print 'done parsing all'
     elapse0=time()-start0

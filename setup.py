@@ -18,7 +18,7 @@ with open(os.path.join(_HERE, 'README.rst'),'r+') as fh:
 
 setup(
     name = "recur7down",
-    version = "0.2.1.5",
+    version = "0.2.1.8",
     description = "recursive web scraper code for work related project",
     long_description = long_description,
     author = "Shichao(Richard) Ji",
@@ -37,7 +37,7 @@ setup(
         'json2df'
       ],
     entry_points={
-        'console_scripts': ['recur7down=recur7down:main'],
+        'console_scripts': ['recur7=recur7down:main'],
       },
 )
 
