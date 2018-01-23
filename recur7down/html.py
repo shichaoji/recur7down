@@ -99,7 +99,7 @@ def html_main():
     fail=[]
     try:
         if sys.argv[1]=='raw':
-            cpu=int(sys.argv[3])s
+            cpu=int(sys.argv[3])
             dpath = str(sys.argv[4])
             diary_index_path = dpath if dpath.endswith('.csv') else dpath+'.csv'
         else:
