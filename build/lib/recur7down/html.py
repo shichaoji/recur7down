@@ -4,6 +4,9 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+
+
 import pandas as pd
 import os
 from time import time, ctime
@@ -32,7 +35,7 @@ def getsingle(ID):
     if n%5000==0 or n==1:
         print ctime(), 'of ', n, 'failed', len(fail)
     try:
-        one=requests.get(diary_link.format(ID), timeout=10)
+        one=requests.get(diary_link.format(ID), timeout=10, headers=headers)
         if one.status_code==200:
         
             with open(folder+'{}.html'.format(ID), 'w+') as fl:
