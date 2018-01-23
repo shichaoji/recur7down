@@ -97,11 +97,21 @@ def html_main():
     
     n=0
     fail=[]
-    cpu = int(raw_input('(multi-processing) how many process to run ? '))
+    try:
+        if sys.argv[1]=='raw':
+            cpu=int(sys.argv[3])s
+            dpath = str(sys.argv[4])
+            diary_index_path = dpath if dpath.endswith('.csv') else dpath+'.csv'
+        else:
+            cpu = int(raw_input('(multi-processing) how many process to run ? '))
+    except:
+        cpu = int(raw_input('(multi-processing) how many process to run ? '))
     
-
+    
+    diary_index_path = 'diary_all.csv'
         
-    df=pd.read_csv('diary_all.csv', usecols=['group_id'])
+    df=pd.read_csv(diary_index_path, usecols=['group_id'])
+    
     print 'start scraping', ctime()
     print len(df['group_id'].unique()), df.shape
 

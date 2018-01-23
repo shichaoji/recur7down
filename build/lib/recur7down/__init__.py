@@ -12,11 +12,13 @@ def main():
     entrypoint, if with first input 'raw', then taking input instead of read
     get product(p) or diary(d) or transaction(t) or html(h) or parse diary(pd):  \np/d/t/h/pd? 
     """
-    if sys.argv[1]=='raw':
-        c = str(sys.argv[2]).strip()
-    else:
+    try:
+        if sys.argv[1]=='raw':
+            c = str(sys.argv[2]).strip()
+        else:
+            c = raw_input('get product(p) or diary(d) or transaction(t) or html(h) or parse diary(pd):  \np/d/t/h/pd? ')
+    except:
         c = raw_input('get product(p) or diary(d) or transaction(t) or html(h) or parse diary(pd):  \np/d/t/h/pd? ')
-        
     if c.lower()=='p':
         product_main()
     elif c.lower()=='d':
